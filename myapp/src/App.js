@@ -661,14 +661,7 @@ class App extends Component {
             </header>
 
             <section className="songs-section">
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '24px',
-                paddingBottom: '8px',
-                borderBottom: '1px solid rgba(255,255,255,0.05)'
-              }}>
+              <div className="songs-section-header">
                 <h2 className="section-title" style={{ margin: 0 }}>
                   {activeTabId === 'LIKED' ? `${filteredSongs.length} Tracks` :
                     (activeTabId === 'SEARCH' ? 'Top Results' :

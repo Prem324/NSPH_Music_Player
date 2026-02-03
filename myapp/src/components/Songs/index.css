@@ -12,6 +12,14 @@
     width: 100%;
 }
 
+@media (max-width: 480px) {
+    .song-item {
+        padding: 12px;
+        gap: 8px;
+        width: 100%;
+    }
+}
+
 .song-item:hover {
     background-color: #282828;
 }

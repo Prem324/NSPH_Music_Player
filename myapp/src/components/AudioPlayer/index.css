@@ -1,7 +1,8 @@
 /* --- Base / Mobile Portrait (< 600px) --- */
 .audio-player {
   width: 100%;
-  height: 85px;
+  height: auto;
+  min-height: 80px;
   background-color: #000;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: grid;
@@ -9,16 +10,17 @@
     "progress progress"
     "info controls";
   grid-template-columns: 1fr auto;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto;
   padding: 0 12px 12px 12px;
   box-sizing: border-box;
 }
 
 .progress-interactive-area {
   grid-area: progress;
-  height: 24px;
+  height: 32px;
   display: flex;
   align-items: center;
+  margin-bottom: 4px;
 }
 
 .progress-bar-container {
@@ -105,6 +107,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+@media (max-width: 360px) {
+  .track-name-display {
+    max-width: 120px;
+  }
 }
 
 .track-credits-display {
