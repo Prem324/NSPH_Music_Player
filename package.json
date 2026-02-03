@@ -1,0 +1,12 @@
+{
+    "name": "music-album-project",
+    "version": "1.0.0",
+    "description": "Music Album Project",
+    "scripts": {
+        "start": "npm start --prefix myapp",
+        "build": "npm run build --prefix myapp",
+        "test": "npm test --prefix myapp"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}

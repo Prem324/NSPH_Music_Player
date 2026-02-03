@@ -1,0 +1,333 @@
+/* --- Base / Mobile Portrait (< 600px) --- */
+.audio-player {
+  width: 100%;
+  height: 85px;
+  background-color: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: grid;
+  grid-template-areas:
+    "progress progress"
+    "info controls";
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  padding: 0 12px 12px 12px;
+  box-sizing: border-box;
+}
+
+.progress-interactive-area {
+  grid-area: progress;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.progress-bar-container {
+  flex: 1;
+  height: 4px;
+  background-color: #4d4d4d;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #fff;
+  border-radius: 2px;
+  position: relative;
+}
+
+.progress-knob {
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.2s;
+}
+
+.progress-bar-container:hover .progress-knob {
+  opacity: 1;
+}
+
+.time-stamp {
+  display: none;
+}
+
+/* Bottom section: Info and Play */
+.current-track-info-section {
+  grid-area: info;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.player-controls-section {
+  grid-area: controls;
+  display: flex;
+  align-items: center;
+}
+
+.player-utility-section {
+  display: none !important;
+}
+
+/* Hidden on mobile */
+
+.track-art-placeholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.track-text-container {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.track-name-display {
+  font-size: 13px;
+  color: #fff;
+  margin: 0;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-credits-display {
+  font-size: 10px;
+  color: #b3b3b3;
+  margin: 2px 0 0 0;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  color: #b3b3b3;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.play-pause-circle-btn {
+  width: 38px;
+  height: 38px;
+  background: #fff;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.play-pause-circle-btn svg {
+  color: #000;
+}
+
+.control-icon-btn {
+  display: none;
+}
+
+/* Hide secondary controls on small mobile */
+
+/* --- Mobile Landscape Fix --- */
+@media (max-height: 500px) {
+  .audio-player {
+    height: 70px;
+  }
+
+  .track-art-placeholder {
+    width: 32px;
+    height: 32px;
+  }
+
+  .track-name-display {
+    font-size: 12px;
+  }
+
+  .track-credits-display {
+    display: none;
+  }
+
+  .play-pause-circle-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* --- Tablet / Large Mobile (600px - 1023px) --- */
+@media (min-width: 600px) {
+  .time-stamp {
+    display: inline;
+  }
+
+  .control-icon-btn {
+    display: flex;
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    padding: 8px;
+  }
+
+  .player-controls-section {
+    gap: 16px;
+  }
+}
+
+/* --- Desktop Layout (Spotify Alignment) --- */
+@media (min-width: 1024px) {
+  .audio-player {
+    display: flex;
+    flex-direction: row;
+    height: 90px;
+    padding: 0 48px;
+    background-color: #000;
+    grid-template-areas: none;
+    grid-template-columns: none;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Left Side: Track Info */
+  .current-track-info-section {
+    width: 30%;
+    min-width: 200px;
+    justify-content: flex-start;
+  }
+
+  .track-art-placeholder {
+    width: 56px;
+    height: 56px;
+  }
+
+  .track-name-display {
+    font-size: 14px;
+  }
+
+  .track-credits-display {
+    font-size: 11px;
+  }
+
+  /* Center Side: Controls & Progress */
+  .player-controls-section {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .control-buttons-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .control-icon-btn {
+    display: flex;
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    padding: 8px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .control-icon-btn:hover {
+    color: #fff;
+  }
+
+  .play-pause-circle-btn {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    transition: transform 0.1s;
+  }
+
+  .play-pause-circle-btn:hover {
+    transform: scale(1.06);
+  }
+
+  .progress-interactive-area {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+    height: auto;
+  }
+
+  .time-stamp {
+    display: block;
+    font-size: 11px;
+    color: #b3b3b3;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  /* Right Side: Utilities & Volume */
+  .player-utility-section {
+    display: flex !important;
+    width: 30%;
+    min-width: 180px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .utility-icon-btn {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    padding: 8px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .utility-icon-btn:hover {
+    color: #fff;
+  }
+
+  .volume-interaction-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 120px;
+  }
+
+  .volume-slider-input {
+    flex: 1;
+    appearance: none;
+    height: 4px;
+    background: #4d4d4d;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .volume-slider-input::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}

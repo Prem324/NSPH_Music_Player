@@ -1,0 +1,26 @@
+.tab-item {
+    margin-right: 8px;
+    list-style-type: none;
+}
+
+.tab-btn {
+    background-color: var(--bg-surface-highlight);
+    border: none;
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 32px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.tab-btn:hover {
+    background-color: #333;
+    transform: scale(1.05);
+}
+
+.tab-btn.active-tab-btn {
+    background-color: var(--text-primary);
+    color: var(--bg-base);
+}
