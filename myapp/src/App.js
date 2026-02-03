@@ -6,6 +6,21 @@ import Promos from "./components/Promos";
 import AudioPlayer from "./components/AudioPlayer";
 import "./App.css";
 
+const albumImages = [
+  {
+    albumId: "1",
+    albumImage: "https://res.cloudinary.com/dlakv8a0n/image/upload/v1770109550/WhatsApp_Image_2026-02-03_at_11.09.47_AM_xgryaa.jpg"
+  },
+  {
+    albumId: "2",
+    albumImage: "https://res.cloudinary.com/dlakv8a0n/image/upload/v1770109550/WhatsApp_Image_2026-02-03_at_11.09.48_AM_1_p22gmp.jpg"
+  },
+  {
+    albumId: "3",
+    albumImage: "https://res.cloudinary.com/dlakv8a0n/image/upload/v1714977767/NeeveAlpha_light.png"
+  }
+]
+
 const promosList = [
   {
     promoId: "ABBA THANDRI",
@@ -640,8 +655,28 @@ class App extends Component {
               <div className="album-header">
                 <div className="album-icon-container" style={{
                   backgroundColor: activeTabId === 'ABBA THANDRI' ? '#e91429' : (activeTabId === 'PRANAMAA STHUTHINCHU' ? '#1db954' : '#2196f3'),
+                  overflow: 'hidden',
+                  padding: 0
                 }}>
-                  {activeTabId === 'ABBA THANDRI' ? 'A' : (activeTabId === 'PRANAMAA STHUTHINCHU' ? 'P' : (activeTabId === 'LIKED' ? '❤' : 'S'))}
+                  {(() => {
+                    const albumIdMap = { 'ABBA THANDRI': '1', 'PRANAMAA STHUTHINCHU': '2', 'NEEVE ALPHA': '3' };
+                    const albumData = albumImages.find(img => img.albumId === albumIdMap[activeTabId]);
+
+                    if (albumData?.albumImage) {
+                      return (
+                        <div style={{
+                          width: '100%',
+                          height: '100%',
+                          backgroundImage: `url(${albumData.albumImage})`,
+                          backgroundSize: '100% auto',
+                          backgroundRepeat: 'repeat-y',
+                          backgroundPosition: 'top center'
+                        }} alt="Album Cover" />
+                      );
+                    }
+
+                    return activeTabId === 'ABBA THANDRI' ? 'A' : (activeTabId === 'PRANAMAA STHUTHINCHU' ? 'P' : (activeTabId === 'LIKED' ? '❤' : 'S'));
+                  })()}
                 </div>
                 <div className="album-info-text">
                   <p className="playlist-label">Playlist</p>
