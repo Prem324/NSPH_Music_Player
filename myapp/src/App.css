@@ -226,10 +226,50 @@ body {
     margin-top: 32px;
 }
 
+@media (max-width: 767px) {
+    .promo-credits-wrapper {
+        gap: 8px;
+        margin-top: 16px;
+    }
+}
+
 @media (min-width: 1024px) {
     .promo-credits-wrapper {
         flex-direction: row;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 32px;
+    }
+
+    .promo-section {
+        flex: 1;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .album-credits-card {
+        flex: 1;
+        margin: 0;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px;
+    }
+
+    .credits-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .credits-list {
+        gap: 16px;
+        align-items: center;
+    }
+
+    .credits-list p {
+        font-size: 16px;
     }
 }
 
@@ -246,7 +286,7 @@ body {
 
 @media (max-width: 400px) {
     .album-credits-card {
-        width: 50%
+        width: 100%;
     }
 }
 
@@ -523,9 +563,16 @@ body {
 
 /* Player Bar Control */
 .player-bar {
-    background: #000;
+    background: transparent;
     order: 2;
     z-index: 100;
+    pointer-events: none;
+    /* Allow clicks through the bar itself */
+}
+
+.player-bar>* {
+    pointer-events: auto;
+    /* But not the player content */
 }
 
 @media (min-width: 1024px) {
@@ -533,6 +580,8 @@ body {
         grid-column: 1 / 3;
         grid-row: 2 / 3;
         padding-top: 4px;
+        background: #000;
+        pointer-events: auto;
     }
 }
 
@@ -555,6 +604,7 @@ body {
         padding-right: 16px;
         scroll-snap-type: x mandatory;
         gap: 12px;
+        margin-bottom: 0;
     }
 }
 

@@ -9,7 +9,7 @@ const Promos = (props) => {
             <video className="promo-video" loop autoPlay controls muted>
                 <source src={promoUrl} />
             </video>
-            <div className="promo-badge">Featured</div>
+            <div className="promo-badge">Promo</div>
         </div>
     )
 }

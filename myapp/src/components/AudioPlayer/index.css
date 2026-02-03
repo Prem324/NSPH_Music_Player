@@ -1,10 +1,12 @@
-/* --- Base / Mobile Portrait (< 600px) --- */
 .audio-player {
-  width: 100%;
+  width: calc(100% - 16px);
+  margin: 0 8px 8px 8px;
   height: auto;
   min-height: 80px;
-  background-color: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   display: grid;
   grid-template-areas:
     "progress progress"
@@ -13,6 +15,7 @@
   grid-template-rows: auto auto;
   padding: 0 12px 12px 12px;
   box-sizing: border-box;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .progress-interactive-area {
@@ -213,6 +216,13 @@
     grid-template-columns: none;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    margin: 0;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+    backdrop-filter: none;
+    box-shadow: none;
   }
 
   /* Left Side: Track Info */
