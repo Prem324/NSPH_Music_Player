@@ -1,23 +1,32 @@
 .promo-container {
-    flex: 0 0 300px;
+    flex: 0 0 320px;
     background: linear-gradient(135deg, var(--bg-surface-highlight), var(--bg-surface));
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
     position: relative;
-    transition: var(--transition-smooth);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 767px) {
     .promo-container {
-        flex: 0 0 320px;
-        max-width: calc(100vw - 48px);
+        flex: 0 0 280px;
+        max-width: 85vw;
         scroll-snap-align: start;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .promo-container {
+        flex: 0 0 260px;
     }
 }
 
 .promo-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
 }
 
 .promo-title {
@@ -25,18 +34,30 @@
     top: 16px;
     left: 16px;
     z-index: 10;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     color: #fff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    margin: 0;
+    pointer-events: none;
+    max-width: 80%;
+}
+
+@media (max-width: 480px) {
+    .promo-title {
+        font-size: 15px;
+        top: 12px;
+        left: 12px;
+    }
 }
 
 .promo-video {
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
-    opacity: 0.8;
-    transition: var(--transition-smooth);
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+    display: block;
 }
 
 .promo-container:hover .promo-video {
@@ -45,13 +66,15 @@
 
 .promo-badge {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
+    bottom: 12px;
+    right: 12px;
     background-color: var(--accent-primary);
     color: #000;
-    padding: 4px 12px;
+    padding: 4px 10px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }

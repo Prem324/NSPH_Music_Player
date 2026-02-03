@@ -241,6 +241,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    width: 100%;
+}
+
+@media (max-width: 400px) {
+    .album-credits-card {
+        width: 50%
+    }
 }
 
 .credits-title {
@@ -396,6 +403,12 @@ body {
     width: max-content;
 }
 
+@media (max-width: 600px) {
+    .tabs-list-container {
+        gap: 8px;
+    }
+}
+
 /* Landscape Mobile Fixes */
 @media (max-height: 450px) and (max-width: 920px) {
     .album-header {
@@ -541,6 +554,7 @@ body {
         padding-left: 16px;
         padding-right: 16px;
         scroll-snap-type: x mandatory;
+        gap: 12px;
     }
 }
 

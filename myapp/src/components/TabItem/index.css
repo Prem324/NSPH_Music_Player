@@ -6,7 +6,7 @@
 .tab-btn {
     background-color: var(--bg-surface-highlight);
     border: none;
-    color: var(--text-primary);
+    color: var(--text-main);
     padding: 8px 16px;
     border-radius: 32px;
     font-size: 14px;
@@ -21,6 +21,19 @@
 }
 
 .tab-btn.active-tab-btn {
-    background-color: var(--text-primary);
+    background-color: var(--text-main);
     color: var(--bg-base);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .tab-item {
+        margin-right: 4px;
+    }
+
+    .tab-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        min-width: fit-content;
+    }
 }
