@@ -75,7 +75,7 @@ const songsList = [
     category: "ABBA THANDRI",
     songTitle: "05 Naa Papamu Kshamiyinchu",
     artist: "Kripal",
-    credits: "Music: Bro. Kripal Mohan",
+    credits: "Sung by Bro. Kripal Mohan",
     songUrl:
       "https://res.cloudinary.com/dlakv8a0n/video/upload/v1713371525/Albums/Abba%20Thandri/Naa%20Papamu%20Kshamiyinchu.mp3",
   },
@@ -111,7 +111,7 @@ const songsList = [
     category: "ABBA THANDRI",
     songTitle: "09 El Shaddai",
     artist: "Kripal",
-    credits: "Music: Bro. Kripal Mohan",
+    credits: "Sung by Bro. Kripal Mohan",
     songUrl:
       "https://res.cloudinary.com/dlakv8a0n/video/upload/v1713371527/Albums/Abba%20Thandri/El%20Shaddai.mp3",
   },
