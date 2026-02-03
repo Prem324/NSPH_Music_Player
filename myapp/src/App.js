@@ -1,5 +1,5 @@
 import React, { Component, createRef } from "react";
-import { FaHome, FaSearch, FaBook, FaHeart } from "react-icons/fa";
+import { FaHome, FaSearch, FaBook, FaHeart, FaBars, FaTimes } from "react-icons/fa";
 import TabItem from "./components/TabItem";
 import Songs from "./components/Songs";
 import Promos from "./components/Promos";
@@ -370,9 +370,19 @@ class App extends Component {
       searchInput: "",
       playingPlaylist: songsList.filter(s => s.category === tabsList[0].tabId),
       likedSongIds: [],
+      isMenuOpen: false,
     };
     this.searchInputRef = createRef();
   }
+
+  toggleMenu = () => {
+    this.setState(prevState => ({ isMenuOpen: !prevState.isMenuOpen }));
+  };
+
+  handleAlbumClick = (tabId) => {
+    this.clickTabItem(tabId);
+    this.setState({ isMenuOpen: false });
+  };
 
   clickTabItem = (tabValue) => {
     const newPlaylist = songsList.filter(s => s.category === tabValue);
@@ -529,7 +539,7 @@ class App extends Component {
   };
 
   render() {
-    const { activeTabId, currentSongIndex, isPlaying, searchInput, playingPlaylist, likedSongIds } = this.state;
+    const { activeTabId, currentSongIndex, isPlaying, searchInput, playingPlaylist, likedSongIds, isMenuOpen } = this.state;
     const filteredPromos = this.getPromoUrl();
     const filteredSongs = this.getFilteredSongs();
 
@@ -540,8 +550,41 @@ class App extends Component {
       <div className="app-container">
         {this.renderSidebar()}
 
+        {/* Mobile Sidebar Menu Drawer */}
+        <div className={`mobile-menu-overlay ${isMenuOpen ? 'open' : ''}`} onClick={this.toggleMenu}>
+          <div className="mobile-menu-drawer" onClick={e => e.stopPropagation()}>
+            <div className="mobile-menu-header">
+              <h2 className="mobile-menu-title">Explore Albums</h2>
+              <button className="close-menu-btn" onClick={this.toggleMenu}>
+                <FaTimes size={24} />
+              </button>
+            </div>
+            <ul className="mobile-album-list">
+              {tabsList.map(tab => (
+                <li
+                  key={tab.tabId}
+                  className={`mobile-album-item ${activeTabId === tab.tabId ? 'active' : ''}`}
+                  onClick={() => this.handleAlbumClick(tab.tabId)}
+                >
+                  {tab.displayText}
+                </li>
+              ))}
+              <li
+                className={`mobile-album-item ${activeTabId === 'LIKED' ? 'active' : ''}`}
+                onClick={() => this.handleAlbumClick('LIKED')}
+                style={{ marginTop: '12px', color: 'var(--accent-primary)' }}
+              >
+                <FaHeart style={{ marginRight: '12px' }} /> Liked Songs
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <main className="main-content">
           <header className="top-bar">
+            <div className="hamburger-container mobile-only" onClick={this.toggleMenu}>
+              <FaBars size={24} />
+            </div>
             <div className="search-container" style={{ position: 'relative' }}>
               <FaSearch style={{
                 position: 'absolute',
