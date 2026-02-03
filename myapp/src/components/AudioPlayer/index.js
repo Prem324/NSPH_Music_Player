@@ -30,7 +30,33 @@ class AudioPlayer extends Component {
 
     this.audioRef = React.createRef();
     this.playPromise = null;
+    this.touchStartX = 0;
+    this.touchStartY = 0;
   }
+
+  handleTouchStart = (e) => {
+    this.touchStartX = e.touches[0].clientX;
+    this.touchStartY = e.touches[0].clientY;
+  };
+
+  handleTouchEnd = (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+
+    const dx = touchEndX - this.touchStartX;
+    const dy = touchEndY - this.touchStartY;
+
+    // Thresholds: at least 50px horizontal, and more horizontal than vertical
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) {
+        // Swipe Left -> Next
+        this.handleNextTrack();
+      } else {
+        // Swipe Right -> Prev
+        this.handlePrevTrack();
+      }
+    }
+  };
 
   componentDidMount() {
     this.loadTrack(this.state.trackIndex, this.props.autoPlay);
@@ -221,7 +247,11 @@ class AudioPlayer extends Component {
     const displayLetter = displayTitle[0] || track.title[0]
 
     return (
-      <div className="audio-player">
+      <div
+        className="audio-player"
+        onTouchStart={this.handleTouchStart}
+        onTouchEnd={this.handleTouchEnd}
+      >
         <div className="current-track-info-section">
           <div className="track-art-placeholder" style={{ backgroundColor: bgColor, color: '#fff' }}>
             {displayLetter}
