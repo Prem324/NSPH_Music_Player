@@ -1,5 +1,5 @@
 import React, { Component, createRef } from "react";
-import { FaHome, FaSearch, FaBook, FaHeart, FaBars, FaTimes } from "react-icons/fa";
+import { FaHome, FaSearch, FaBook, FaHeart, FaBars, FaTimes, FaYoutube } from "react-icons/fa";
 import TabItem from "./components/TabItem";
 import Songs from "./components/Songs";
 import Promos from "./components/Promos";
@@ -622,19 +622,16 @@ class App extends Component {
             </div>
 
             <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-              <div style={{
-                width: '36px',
-                height: '36px',
-                background: '#e91429',
-                borderRadius: '50%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontWeight: '700',
-                fontSize: '14px',
-                cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
-              }}>U</div>
+              <a
+                href="https://www.youtube.com/@chstanleytitus"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <div className="profile-icon">
+                  <FaYoutube size={20} />
+                </div>
+              </a>
             </div>
           </header>
 
