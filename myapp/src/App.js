@@ -1,5 +1,13 @@
 import React, { Component, createRef } from "react";
-import { FaHome, FaSearch, FaBook, FaHeart, FaBars, FaTimes, FaYoutube } from "react-icons/fa";
+import {
+  FaHome,
+  FaSearch,
+  FaBook,
+  FaHeart,
+  FaBars,
+  FaTimes,
+  FaYoutube,
+} from "react-icons/fa";
 import TabItem from "./components/TabItem";
 import Songs from "./components/Songs";
 import Promos from "./components/Promos";
@@ -9,17 +17,20 @@ import "./App.css";
 const albumImages = [
   {
     albumId: "1",
-    albumImage: "https://res.cloudinary.com/dlakv8a0n/image/upload/v1770109550/WhatsApp_Image_2026-02-03_at_11.09.47_AM_xgryaa.jpg"
+    albumImage:
+      "https://res.cloudinary.com/dlakv8a0n/image/upload/v1770109550/WhatsApp_Image_2026-02-03_at_11.09.47_AM_xgryaa.jpg",
   },
   {
     albumId: "2",
-    albumImage: "https://res.cloudinary.com/dlakv8a0n/image/upload/v1770109550/WhatsApp_Image_2026-02-03_at_11.09.48_AM_1_p22gmp.jpg"
+    albumImage:
+      "https://res.cloudinary.com/dlakv8a0n/image/upload/v1770109550/WhatsApp_Image_2026-02-03_at_11.09.48_AM_1_p22gmp.jpg",
   },
   {
     albumId: "3",
-    albumImage: "https://res.cloudinary.com/dlakv8a0n/image/upload/v1714977767/NeeveAlpha_light.png"
-  }
-]
+    albumImage:
+      "https://res.cloudinary.com/dlakv8a0n/image/upload/v1714977767/NeeveAlpha_light.png",
+  },
+];
 
 const promosList = [
   {
@@ -110,7 +121,7 @@ const songsList = [
     artist: "Stanley, Shakeena",
     credits: "Duo: Stanley & Shakeena",
     songUrl:
-      "https://res.cloudinary.com/dlakv8a0n/video/upload/v1713371526/Albums/Abba%20Thandri/Manchivaadu%20Naa%20Yessayya.mp3",
+      "https://res.cloudinary.com/dlakv8a0n/video/upload/v1713371526/Albums/Abba%20Thandri/Naa%20Athikramame.mp3",
   },
   {
     songId: 7,
@@ -215,7 +226,7 @@ const songsList = [
   {
     songId: 18,
     category: "PRANAMAA STHUTHINCHU",
-    songTitle: "09 Deevenalatho",
+    songTitle: "09 Naa Devudu",
     artist: "Stanley",
     credits: "Sung by Bro. Stanley",
     songUrl:
@@ -383,7 +394,9 @@ class App extends Component {
       currentSongIndex: 0,
       isPlaying: false,
       searchInput: "",
-      playingPlaylist: songsList.filter(s => s.category === tabsList[0].tabId),
+      playingPlaylist: songsList.filter(
+        (s) => s.category === tabsList[0].tabId,
+      ),
       likedSongIds: [],
       isMenuOpen: false,
     };
@@ -391,7 +404,7 @@ class App extends Component {
   }
 
   toggleMenu = () => {
-    this.setState(prevState => ({ isMenuOpen: !prevState.isMenuOpen }));
+    this.setState((prevState) => ({ isMenuOpen: !prevState.isMenuOpen }));
   };
 
   handleAlbumClick = (tabId) => {
@@ -400,7 +413,7 @@ class App extends Component {
   };
 
   clickTabItem = (tabValue) => {
-    const newPlaylist = songsList.filter(s => s.category === tabValue);
+    const newPlaylist = songsList.filter((s) => s.category === tabValue);
     this.setState({
       activeTabId: tabValue,
       searchInput: "",
@@ -415,7 +428,7 @@ class App extends Component {
   };
 
   handleSearchSidebarClick = () => {
-    this.setState({ activeTabId: 'SEARCH' }, () => {
+    this.setState({ activeTabId: "SEARCH" }, () => {
       if (this.searchInputRef.current) {
         this.searchInputRef.current.focus();
       }
@@ -427,19 +440,22 @@ class App extends Component {
     this.setState({
       playingPlaylist: filteredSongs,
       currentSongIndex: index,
-      isPlaying: true
+      isPlaying: true,
     });
   };
 
   handleSearchChange = (event) => {
-    this.setState({ searchInput: event.target.value, activeTabId: event.target.value ? 'SEARCH' : this.state.activeTabId });
+    this.setState({
+      searchInput: event.target.value,
+      activeTabId: event.target.value ? "SEARCH" : this.state.activeTabId,
+    });
   };
 
   toggleLikeSong = (songId) => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       const { likedSongIds } = prevState;
       if (likedSongIds.includes(songId)) {
-        return { likedSongIds: likedSongIds.filter(id => id !== songId) };
+        return { likedSongIds: likedSongIds.filter((id) => id !== songId) };
       }
       return { likedSongIds: [...likedSongIds, songId] };
     });
@@ -447,53 +463,55 @@ class App extends Component {
 
   getFilteredSongs = () => {
     const { activeTabId, searchInput } = this.state;
-    if (activeTabId === 'SEARCH' || searchInput !== "") {
-      return songsList.filter(each =>
-        each.songTitle.toLowerCase().includes(searchInput.toLowerCase())
+    if (activeTabId === "SEARCH" || searchInput !== "") {
+      return songsList.filter((each) =>
+        each.songTitle.toLowerCase().includes(searchInput.toLowerCase()),
       );
     }
-    if (activeTabId === 'LIKED') {
-      return songsList.filter(s => this.state.likedSongIds.includes(s.songId));
+    if (activeTabId === "LIKED") {
+      return songsList.filter((s) =>
+        this.state.likedSongIds.includes(s.songId),
+      );
     }
     return songsList.filter(
-      (eachsongDetails) => eachsongDetails.category === activeTabId
+      (eachsongDetails) => eachsongDetails.category === activeTabId,
     );
   };
 
   getPromoUrl = () => {
     const { activeTabId } = this.state;
-    const currentTab = tabsList.find(t => t.tabId === activeTabId);
+    const currentTab = tabsList.find((t) => t.tabId === activeTabId);
     if (!currentTab) return [promosList[0]]; // Default promo if in special view
-    return promosList.filter(
-      (eachPromo) => eachPromo.promoId === activeTabId
-    );
+    return promosList.filter((eachPromo) => eachPromo.promoId === activeTabId);
   };
 
   renderSidebar = () => {
     const { likedSongIds, activeTabId, searchInput } = this.state;
     const isHomeActive = activeTabId === tabsList[0].tabId && !searchInput;
-    const isSearchActive = activeTabId === 'SEARCH';
+    const isSearchActive = activeTabId === "SEARCH";
 
     return (
       <aside className="sidebar">
         <nav className="sidebar-nav">
           <div
-            className={`nav-item ${isHomeActive ? 'active' : ''}`}
+            className={`nav-item ${isHomeActive ? "active" : ""}`}
             onClick={this.handleHomeClick}
           >
             <FaHome size={26} />
             <span>Home</span>
           </div>
           <div
-            className={`nav-item ${isSearchActive ? 'active' : ''}`}
+            className={`nav-item ${isSearchActive ? "active" : ""}`}
             onClick={this.handleSearchSidebarClick}
           >
             <FaSearch size={26} />
             <span>Search</span>
           </div>
           <div
-            className={`nav-item mobile-only ${activeTabId === 'LIKED' ? 'active' : ''}`}
-            onClick={() => this.setState({ activeTabId: 'LIKED', searchInput: "" })}
+            className={`nav-item mobile-only ${activeTabId === "LIKED" ? "active" : ""}`}
+            onClick={() =>
+              this.setState({ activeTabId: "LIKED", searchInput: "" })
+            }
           >
             <FaBook size={26} />
             <span>Library</span>
@@ -501,40 +519,69 @@ class App extends Component {
         </nav>
 
         <div className="sidebar-library">
-          <div className="nav-item" style={{ cursor: 'default', opacity: 1 }}>
+          <div className="nav-item" style={{ cursor: "default", opacity: 1 }}>
             <FaBook size={26} />
             <span>Your Library</span>
           </div>
 
-          <div style={{ marginTop: '8px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <div className={`nav-item ${activeTabId === 'LIKED' ? 'active' : ''}`}
-              style={{ padding: '8px 12px' }}
-              onClick={() => this.setState({ activeTabId: 'LIKED', searchInput: "" })}>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                background: 'linear-gradient(135deg, #450af5, #c4efd9)',
-                borderRadius: '4px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginRight: '12px'
-              }}>
+          <div
+            style={{
+              marginTop: "8px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "4px",
+            }}
+          >
+            <div
+              className={`nav-item ${activeTabId === "LIKED" ? "active" : ""}`}
+              style={{ padding: "8px 12px" }}
+              onClick={() =>
+                this.setState({ activeTabId: "LIKED", searchInput: "" })
+              }
+            >
+              <div
+                style={{
+                  width: "48px",
+                  height: "48px",
+                  background: "linear-gradient(135deg, #450af5, #c4efd9)",
+                  borderRadius: "4px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginRight: "12px",
+                }}
+              >
                 <FaHeart size={20} color="white" />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontSize: '14px', fontWeight: '700' }}>Liked Songs</span>
-                <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Playlist • {likedSongIds.length} songs</span>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span style={{ fontSize: "14px", fontWeight: "700" }}>
+                  Liked Songs
+                </span>
+                <span
+                  style={{ fontSize: "12px", color: "var(--text-secondary)" }}
+                >
+                  Playlist • {likedSongIds.length} songs
+                </span>
               </div>
             </div>
 
-            <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '8px 12px' }}></div>
+            <div
+              style={{
+                height: "1px",
+                background: "rgba(255,255,255,0.1)",
+                margin: "8px 12px",
+              }}
+            ></div>
 
-            {tabsList.map(tab => (
+            {tabsList.map((tab) => (
               <div
                 key={tab.tabId}
-                className={`nav-item ${this.state.activeTabId === tab.tabId && !searchInput ? 'active' : ''}`}
-                style={{ fontSize: '14px', minHeight: '40px', padding: '8px 12px' }}
+                className={`nav-item ${this.state.activeTabId === tab.tabId && !searchInput ? "active" : ""}`}
+                style={{
+                  fontSize: "14px",
+                  minHeight: "40px",
+                  padding: "8px 12px",
+                }}
                 onClick={() => this.clickTabItem(tab.tabId)}
               >
                 {tab.displayText}
@@ -554,20 +601,36 @@ class App extends Component {
   };
 
   render() {
-    const { activeTabId, currentSongIndex, isPlaying, searchInput, playingPlaylist, likedSongIds, isMenuOpen } = this.state;
+    const {
+      activeTabId,
+      currentSongIndex,
+      isPlaying,
+      searchInput,
+      playingPlaylist,
+      likedSongIds,
+      isMenuOpen,
+    } = this.state;
     const filteredPromos = this.getPromoUrl();
     const filteredSongs = this.getFilteredSongs();
 
     const currentPlayingSong = playingPlaylist[currentSongIndex];
-    const isCurrentSongLiked = currentPlayingSong ? likedSongIds.includes(currentPlayingSong.songId) : false;
+    const isCurrentSongLiked = currentPlayingSong
+      ? likedSongIds.includes(currentPlayingSong.songId)
+      : false;
 
     return (
       <div className="app-container">
         {this.renderSidebar()}
 
         {/* Mobile Sidebar Menu Drawer */}
-        <div className={`mobile-menu-overlay ${isMenuOpen ? 'open' : ''}`} onClick={this.toggleMenu}>
-          <div className="mobile-menu-drawer" onClick={e => e.stopPropagation()}>
+        <div
+          className={`mobile-menu-overlay ${isMenuOpen ? "open" : ""}`}
+          onClick={this.toggleMenu}
+        >
+          <div
+            className="mobile-menu-drawer"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="mobile-menu-header">
               <h2 className="mobile-menu-title">Explore Albums</h2>
               <button className="close-menu-btn" onClick={this.toggleMenu}>
@@ -575,21 +638,21 @@ class App extends Component {
               </button>
             </div>
             <ul className="mobile-album-list">
-              {tabsList.map(tab => (
+              {tabsList.map((tab) => (
                 <li
                   key={tab.tabId}
-                  className={`mobile-album-item ${activeTabId === tab.tabId ? 'active' : ''}`}
+                  className={`mobile-album-item ${activeTabId === tab.tabId ? "active" : ""}`}
                   onClick={() => this.handleAlbumClick(tab.tabId)}
                 >
                   {tab.displayText}
                 </li>
               ))}
               <li
-                className={`mobile-album-item ${activeTabId === 'LIKED' ? 'active' : ''}`}
-                onClick={() => this.handleAlbumClick('LIKED')}
-                style={{ marginTop: '12px', color: 'var(--accent-primary)' }}
+                className={`mobile-album-item ${activeTabId === "LIKED" ? "active" : ""}`}
+                onClick={() => this.handleAlbumClick("LIKED")}
+                style={{ marginTop: "12px", color: "var(--accent-primary)" }}
               >
-                <FaHeart style={{ marginRight: '12px' }} /> Liked Songs
+                <FaHeart style={{ marginRight: "12px" }} /> Liked Songs
               </li>
             </ul>
           </div>
@@ -597,19 +660,24 @@ class App extends Component {
 
         <main className="main-content">
           <header className="top-bar">
-            <div className="hamburger-container mobile-only" onClick={this.toggleMenu}>
+            <div
+              className="hamburger-container mobile-only"
+              onClick={this.toggleMenu}
+            >
               <FaBars size={24} />
             </div>
-            <div className="search-container" style={{ position: 'relative' }}>
-              <FaSearch style={{
-                position: 'absolute',
-                left: '16px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                color: searchInput ? '#fff' : '#b3b3b3',
-                fontSize: '18px',
-                transition: 'color 0.3s'
-              }} />
+            <div className="search-container" style={{ position: "relative" }}>
+              <FaSearch
+                style={{
+                  position: "absolute",
+                  left: "16px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  color: searchInput ? "#fff" : "#b3b3b3",
+                  fontSize: "18px",
+                  transition: "color 0.3s",
+                }}
+              />
               <input
                 type="text"
                 ref={this.searchInputRef}
@@ -622,26 +690,29 @@ class App extends Component {
                 <button
                   onClick={() => this.setState({ searchInput: "" })}
                   style={{
-                    position: 'absolute',
-                    right: '16px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    background: 'none',
-                    border: 'none',
-                    color: '#fff',
-                    cursor: 'pointer',
-                    fontSize: '20px'
+                    position: "absolute",
+                    right: "16px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    color: "#fff",
+                    cursor: "pointer",
+                    fontSize: "20px",
                   }}
-                > × </button>
+                >
+                  {" "}
+                  ×{" "}
+                </button>
               )}
             </div>
 
-            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
               <a
                 href="https://www.youtube.com/@chstanleytitus"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ textDecoration: 'none', color: 'inherit' }}
+                style={{ textDecoration: "none", color: "inherit" }}
               >
                 <div className="profile-icon">
                   <FaYoutube size={20} />
@@ -651,84 +722,150 @@ class App extends Component {
           </header>
 
           <div className="music-album-container">
-            <header style={{ marginBottom: '32px' }}>
+            <header style={{ marginBottom: "32px" }}>
               <div className="album-header">
-                <div className="album-icon-container" style={{
-                  backgroundColor: activeTabId === 'ABBA THANDRI' ? '#e91429' : (activeTabId === 'PRANAMAA STHUTHINCHU' ? '#1db954' : '#2196f3'),
-                  overflow: 'hidden',
-                  padding: 0
-                }}>
+                <div
+                  className="album-icon-container"
+                  style={{
+                    backgroundColor:
+                      activeTabId === "ABBA THANDRI"
+                        ? "#e91429"
+                        : activeTabId === "PRANAMAA STHUTHINCHU"
+                          ? "#1db954"
+                          : "#2196f3",
+                    overflow: "hidden",
+                    padding: 0,
+                  }}
+                >
                   {(() => {
-                    const albumIdMap = { 'ABBA THANDRI': '1', 'PRANAMAA STHUTHINCHU': '2', 'NEEVE ALPHA': '3' };
-                    const albumData = albumImages.find(img => img.albumId === albumIdMap[activeTabId]);
+                    const albumIdMap = {
+                      "ABBA THANDRI": "1",
+                      "PRANAMAA STHUTHINCHU": "2",
+                      "NEEVE ALPHA": "3",
+                    };
+                    const albumData = albumImages.find(
+                      (img) => img.albumId === albumIdMap[activeTabId],
+                    );
 
                     if (albumData?.albumImage) {
                       return (
-                        <div style={{
-                          width: '100%',
-                          height: '100%',
-                          backgroundImage: `url(${albumData.albumImage})`,
-                          backgroundSize: '100% auto',
-                          backgroundRepeat: 'repeat-y',
-                          backgroundPosition: 'top center'
-                        }} alt="Album Cover" />
+                        <div
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            backgroundImage: `url(${albumData.albumImage})`,
+                            backgroundSize: "100% auto",
+                            backgroundRepeat: "repeat-y",
+                            backgroundPosition: "top center",
+                          }}
+                          alt="Album Cover"
+                        />
                       );
                     }
 
-                    return activeTabId === 'ABBA THANDRI' ? 'A' : (activeTabId === 'PRANAMAA STHUTHINCHU' ? 'P' : (activeTabId === 'LIKED' ? '❤' : 'S'));
+                    return activeTabId === "ABBA THANDRI"
+                      ? "A"
+                      : activeTabId === "PRANAMAA STHUTHINCHU"
+                        ? "P"
+                        : activeTabId === "LIKED"
+                          ? "❤"
+                          : "S";
                   })()}
                 </div>
                 <div className="album-info-text">
                   <p className="playlist-label">Playlist</p>
                   <h1 className="album-title">
-                    {activeTabId === 'LIKED' ? 'Liked Songs' :
-                      (activeTabId === 'SEARCH' ? (searchInput ? `Results for "${searchInput}"` : 'Browse Catalog') :
-                        (activeTabId === 'ABBA THANDRI' ? 'Abba Father' :
-                          (activeTabId === 'PRANAMAA STHUTHINCHU' ? 'Pranamaa Sthuthinchu' : this.getGreeting())))}
+                    {activeTabId === "LIKED"
+                      ? "Liked Songs"
+                      : activeTabId === "SEARCH"
+                        ? searchInput
+                          ? `Results for "${searchInput}"`
+                          : "Browse Catalog"
+                        : activeTabId === "ABBA THANDRI"
+                          ? "Abba Father"
+                          : activeTabId === "PRANAMAA STHUTHINCHU"
+                            ? "Pranamaa Sthuthinchu"
+                            : this.getGreeting()}
                   </h1>
-                  {activeTabId === 'ABBA THANDRI' && (
+                  {activeTabId === "ABBA THANDRI" && (
                     <p className="album-subtitle">
-                      <span className="artist-highlight">Bro. Stanley Titus</span> • An Intimate Worship • 10 songs
+                      <span className="artist-highlight">
+                        Bro. Stanley Titus
+                      </span>{" "}
+                      • An Intimate Worship • 10 songs
                     </p>
                   )}
-                  {activeTabId === 'PRANAMAA STHUTHINCHU' && (
+                  {activeTabId === "PRANAMAA STHUTHINCHU" && (
                     <p className="album-subtitle">
-                      <span className="artist-highlight">Bro. Stanley Titus</span> • Bless the Lord • 17 tracks
+                      <span className="artist-highlight">
+                        Bro. Stanley Titus
+                      </span>{" "}
+                      • Bless the Lord • 17 tracks
                     </p>
                   )}
                 </div>
               </div>
 
-              {activeTabId !== 'LIKED' && activeTabId !== 'SEARCH' && (
+              {activeTabId !== "LIKED" && activeTabId !== "SEARCH" && (
                 <div className="promo-credits-wrapper">
                   <div className="promo-section">
                     {filteredPromos.map((promoDetails) => (
-                      <Promos promoDetails={promoDetails} key={promoDetails.promoId} />
+                      <Promos
+                        promoDetails={promoDetails}
+                        key={promoDetails.promoId}
+                      />
                     ))}
                   </div>
 
-                  {activeTabId === 'ABBA THANDRI' && (
+                  {activeTabId === "ABBA THANDRI" && (
                     <div className="album-credits-card">
                       <h3 className="credits-title">Album Credits</h3>
                       <div className="credits-list">
-                        <p><span className="label">Lyrics & Tunes:</span> Bro. Stanley Titus Chappidi</p>
-                        <p><span className="label">Music & Harmony:</span> Bro. Kripal Mohan</p>
-                        <p><span className="label">Recorded at:</span> Krupa Studio (Vizag)</p>
-                        <p><span className="label">Mastered by:</span> Bro. Solomon Raj</p>
+                        <p>
+                          <span className="label">Lyrics & Tunes:</span> Bro.
+                          Stanley Titus Chappidi
+                        </p>
+                        <p>
+                          <span className="label">Music & Harmony:</span> Bro.
+                          Kripal Mohan
+                        </p>
+                        <p>
+                          <span className="label">Recorded at:</span> Krupa
+                          Studio (Vizag)
+                        </p>
+                        <p>
+                          <span className="label">Mastered by:</span> Bro.
+                          Solomon Raj
+                        </p>
                       </div>
-                      <p className="ministry-tag">Living God Ministries Presents</p>
+                      <p className="ministry-tag">
+                        Living God Ministries Presents
+                      </p>
                     </div>
                   )}
-                  {activeTabId === 'PRANAMAA STHUTHINCHU' && (
+                  {activeTabId === "PRANAMAA STHUTHINCHU" && (
                     <div className="album-credits-card">
                       <h3 className="credits-title">Album Credits</h3>
                       <div className="credits-list">
-                        <p><span className="label">Lyrics:</span> Bro. Stanley Titus Chappidi</p>
-                        <p><span className="label">Music & Keyboard:</span> Samuel Mories</p>
-                        <p><span className="label">Guitars:</span> Manohar Sujit</p>
-                        <p><span className="label">Recorded @:</span> Wave Editor Digital Studio (RJY)</p>
+                        <p>
+                          <span className="label">Lyrics:</span> Bro. Stanley
+                          Titus Chappidi
+                        </p>
+                        <p>
+                          <span className="label">Music & Keyboard:</span>{" "}
+                          Samuel Mories
+                        </p>
+                        <p>
+                          <span className="label">Guitars:</span> Manohar Sujit
+                        </p>
+                        <p>
+                          <span className="label">Recorded @:</span> Wave Editor
+                          Digital Studio (RJY)
+                        </p>
                       </div>
-                      <p className="ministry-tag">Living God Ministries Presents</p>
+                      <p className="ministry-tag">
+                        Living God Ministries Presents
+                      </p>
                     </div>
                   )}
                 </div>
@@ -738,11 +875,13 @@ class App extends Component {
             <section className="songs-section">
               <div className="songs-section-header">
                 <h2 className="section-title" style={{ margin: 0 }}>
-                  {activeTabId === 'LIKED' ? `${filteredSongs.length} Tracks` :
-                    (activeTabId === 'SEARCH' ? 'Top Results' :
-                      `Featured in ${tabsList.find(t => t.tabId === activeTabId)?.displayText || ''}`)}
+                  {activeTabId === "LIKED"
+                    ? `${filteredSongs.length} Tracks`
+                    : activeTabId === "SEARCH"
+                      ? "Top Results"
+                      : `Featured in ${tabsList.find((t) => t.tabId === activeTabId)?.displayText || ""}`}
                 </h2>
-                {activeTabId !== 'LIKED' && activeTabId !== 'SEARCH' && (
+                {activeTabId !== "LIKED" && activeTabId !== "SEARCH" && (
                   <ul className="tabs-list-container">
                     {tabsList.map((tabDetails) => (
                       <TabItem
@@ -763,27 +902,36 @@ class App extends Component {
                       songDetails={songDetails}
                       key={songDetails.songId}
                       onClickSong={() => this.handlePlaySong(index)}
-                      isActive={songDetails.songId === currentPlayingSong?.songId && isPlaying}
+                      isActive={
+                        songDetails.songId === currentPlayingSong?.songId &&
+                        isPlaying
+                      }
                     />
                   ))}
                 </ul>
               ) : (
-                <div style={{
-                  textAlign: 'center',
-                  padding: '100px 40px',
-                  color: 'var(--text-secondary)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '16px'
-                }}>
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "100px 40px",
+                    color: "var(--text-secondary)",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "16px",
+                  }}
+                >
                   <FaSearch size={48} style={{ opacity: 0.2 }} />
                   <h3 style={{ margin: 0 }}>
-                    {activeTabId === 'LIKED' ? "Your liked songs will appear here" :
-                      (activeTabId === 'SEARCH' && !searchInput ? "Search for songs, artists, or albums" :
-                        `No results found for "${searchInput}"`)}
+                    {activeTabId === "LIKED"
+                      ? "Your liked songs will appear here"
+                      : activeTabId === "SEARCH" && !searchInput
+                        ? "Search for songs, artists, or albums"
+                        : `No results found for "${searchInput}"`}
                   </h3>
-                  <p style={{ margin: 0, fontSize: '14px' }}>Check your spelling or try searching for something else.</p>
+                  <p style={{ margin: 0, fontSize: "14px" }}>
+                    Check your spelling or try searching for something else.
+                  </p>
                 </div>
               )}
             </section>
@@ -792,17 +940,20 @@ class App extends Component {
 
         <footer className="player-bar">
           <AudioPlayer
-            playlist={playingPlaylist.map(s => ({
+            playlist={playingPlaylist.map((s) => ({
               id: s.songId,
               title: s.songTitle,
               artist: s.artist,
               credits: s.credits,
-              src: s.songUrl
+              src: s.songUrl,
             }))}
             currentTrackIndex={currentSongIndex}
             autoPlay={isPlaying}
             isLiked={isCurrentSongLiked}
-            toggleLike={() => currentPlayingSong && this.toggleLikeSong(currentPlayingSong.songId)}
+            toggleLike={() =>
+              currentPlayingSong &&
+              this.toggleLikeSong(currentPlayingSong.songId)
+            }
           />
         </footer>
       </div>
