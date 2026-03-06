@@ -501,6 +501,7 @@ class App extends Component {
   renderSplashScreen = () => (
     <div className="splash-screen">
       <div className="splash-content">
+        <img src="/logo.png" alt="NSPH Logo" className="splash-logo" />
         <div className="splash-loader"></div>
       </div>
     </div>
