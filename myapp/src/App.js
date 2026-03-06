@@ -492,6 +492,10 @@ class App extends Component {
 
     return (
       <aside className="sidebar">
+        <div className="logo-container desktop-only">
+          <img src="/logo.png" alt="NSPH Logo" className="app-logo" />
+          <span className="logo-text">NSPH Music</span>
+        </div>
         <nav className="sidebar-nav">
           <div
             className={`nav-item ${isHomeActive ? "active" : ""}`}
@@ -632,7 +636,10 @@ class App extends Component {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mobile-menu-header">
-              <h2 className="mobile-menu-title">Explore Albums</h2>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <img src="/logo.png" alt="NSPH Logo" style={{ width: "30px", height: "30px", borderRadius: "6px" }} />
+                <h2 className="mobile-menu-title">NSPH Music</h2>
+              </div>
               <button className="close-menu-btn" onClick={this.toggleMenu}>
                 <FaTimes size={24} />
               </button>
@@ -665,6 +672,9 @@ class App extends Component {
               onClick={this.toggleMenu}
             >
               <FaBars size={24} />
+            </div>
+            <div className="mobile-logo-container mobile-only">
+              <img src="/logo.png" alt="NSPH Logo" className="mobile-app-logo" />
             </div>
             <div className="search-container" style={{ position: "relative" }}>
               <FaSearch

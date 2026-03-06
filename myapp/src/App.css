@@ -12,6 +12,40 @@
     --nav-mobile-h: 70px;
 }
 
+/* Logo Styles */
+.logo-container {
+    display: flex;
+    align-items: center;
+    padding: 24px 20px;
+    gap: 12px;
+}
+
+.app-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.mobile-logo-container {
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+}
+
+.mobile-app-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+}
+
 /* Reset & Foundation */
 html,
 body {
