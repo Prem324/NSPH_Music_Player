@@ -399,8 +399,21 @@ class App extends Component {
       ),
       likedSongIds: [],
       isMenuOpen: false,
+      isLoading: true,
     };
     this.searchInputRef = createRef();
+  }
+
+  componentDidMount() {
+    // Only show splash screen on mobile devices
+    const isMobile = window.innerWidth <= 767;
+    if (isMobile) {
+      setTimeout(() => {
+        this.setState({ isLoading: false });
+      }, 2500); // Show for 2.5 seconds
+    } else {
+      this.setState({ isLoading: false });
+    }
   }
 
   toggleMenu = () => {
@@ -484,6 +497,16 @@ class App extends Component {
     if (!currentTab) return [promosList[0]]; // Default promo if in special view
     return promosList.filter((eachPromo) => eachPromo.promoId === activeTabId);
   };
+
+  renderSplashScreen = () => (
+    <div className="splash-screen">
+      <div className="splash-content">
+        <img src="/logo.png" alt="NSPH Logo" className="splash-logo" />
+        <h1 className="splash-title">NSPH Music</h1>
+        <div className="splash-loader"></div>
+      </div>
+    </div>
+  );
 
   renderSidebar = () => {
     const { likedSongIds, activeTabId, searchInput } = this.state;
@@ -613,9 +636,14 @@ class App extends Component {
       playingPlaylist,
       likedSongIds,
       isMenuOpen,
+      isLoading,
     } = this.state;
     const filteredPromos = this.getPromoUrl();
     const filteredSongs = this.getFilteredSongs();
+
+    if (isLoading) {
+      return this.renderSplashScreen();
+    }
 
     const currentPlayingSong = playingPlaylist[currentSongIndex];
     const isCurrentSongLiked = currentPlayingSong
